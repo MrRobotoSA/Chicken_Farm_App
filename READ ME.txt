@@ -1,0 +1,10 @@
+All these files are not in use, this was ChatGPT created files
+farm_create.php
+farm_list.php
+house_create.php
+house_list.php
+
+All other files are self created
+
+Continue dev in self created file:
+-> farmDashboard.php
