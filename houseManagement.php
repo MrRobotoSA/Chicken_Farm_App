@@ -101,7 +101,19 @@ try {
                 <li class="crop-item">
                     CropNumber ID: <?php echo $crop['CropNumberID']; ?><br>
                     Total Day-Old Chickens Placed: <?php echo $crop['TotalDayOldChickenPlacement']; ?><br>
-                    Start Date (Age 0): <?php echo $crop['StartPlaceDateAsAge0']; ?>
+                    Start Date (Age 0): <?php echo $crop['StartPlaceDateAsAge0']; ?><br>
+            
+            
+            <!--Coment 1) THe code below is the button used to take the user to the information needed for day 0 information input
+            Notes to change code here below later:
+            1)THIS SHOULD BE PLACED INTO AN IF STAEMENT LATER BECAUSE IT SHOULD ONLY APPEAR IF THIS IS DAY 0, a new crop just sterted
+            2)A different button should be used for the other days, and it should take the user to a different page that is used for inputting information for the other days 
+            -->
+                <a class="house-button" href="cropDay0InputInfo.php?CropNumberID=<?php echo $crop['CropNumberID']; ?>">
+                Enter info for day 0 for this crop
+                </a>
+            <!--End of code talking about in the above comment 1) -->
+
                 </li>
             <?php endforeach; ?>
         </ul>
