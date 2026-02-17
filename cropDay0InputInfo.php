@@ -13,7 +13,6 @@ $cropNumberID = (int)$_GET['CropNumberID'];
 // ===============================
 // Fetch Required Data From DB
 // ===============================
-//NOTE TO SELF: this sql code looks like its not going to correctly fetch the data we need. We need to get the CropNumber info and the House info (to get MeterSquaredArea) in one query. We can do this by joining the CropNumber table with the Houses table on HouseID, and filtering by CropNumberID.
 $sql = "
     SELECT 
         cn.StartPlaceDateAsAge0,
