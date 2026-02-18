@@ -116,7 +116,11 @@ try {
             <?php endif; ?>
             <!--End of code talking about in the above comment 1) -->
             <?php if ($crop['Day0InfoBoolean']) : ?>
-                <h1>it works</h1>
+                    <h1>Click the button below to enter the daily info for this crop</h1>
+                    <br>
+                <a class="house-button" href="cropDailyInputs.php?CropNumberID=<?php echo $crop['CropNumberID']; ?>">
+                Enter Daily info for this crop
+                </a>
             <?php endif; ?>
                 </li>
             <?php endforeach; ?>
