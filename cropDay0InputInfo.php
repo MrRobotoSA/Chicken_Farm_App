@@ -123,7 +123,7 @@ $stmtInsert->execute();
    // $stmtInsert->execute();
 
     // Redirect after success
-    header("Location: houseManagement.php?HouseID=" . $houseID);
+    header("Location: cropDay0waterAndFeedinput.php?HouseID=" . $houseID . "&CropNumberID=" . $cropNumberID);
     exit();
 }
 ?>
