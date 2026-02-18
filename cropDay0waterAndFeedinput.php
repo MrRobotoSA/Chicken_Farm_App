@@ -51,6 +51,7 @@ echo "This cycles crop number " . $cropNumberID . "<br>";
 echo "This cycles CycleDaysID is " . $CycleDaysID . "<br>";
 echo "This cycles BirdAge is " . $BirdAge . "<br>";
 echo "This cycles DateOfCycleDay is " . $DateOfCycleDay . "<br>";
+echo "<br>";
 // ------ Remove this later ------
 //---------------------------------------------------------------------------------
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -91,13 +92,37 @@ try {
         )
     ";
 
-    $stmtWater = $pdo->prepare($insertFood);
-    $stmtWater->execute([
+    $stmtFood = $pdo->prepare($insertFood);
+    $stmtFood->execute([
         $CycleDaysID,
         $BinClosingStockReading
     ]);
 
     echo "food saved successfully.";
+
+// After saving both water and feed readings, redirect back to the house management page for this crop
+//The below SQL code is to get the corredct HouseID for the redirect after saving the water and feed readings, we need this to redirect back to the correct house management page for this crop after saving the water and feed readings for day 0
+    $sqlHouseID = "
+        SELECT HouseID
+        FROM CropNumber
+        WHERE CropNumberID = ?
+    ";
+
+    $stmtHouseID = $pdo->prepare($sqlHouseID);
+    $stmtHouseID->execute([$cropNumberID]);
+    $houseResult = $stmtHouseID->fetch(PDO::FETCH_ASSOC);
+
+    if (!$houseResult) {
+        die("House not found.");
+    }
+
+    $houseID = $houseResult['HouseID'];
+
+
+    //IF all is good then this one line will redirect back to the house management page
+ header("Location: houseManagement.php?HouseID=" . $houseID . "&CropNumberID=" . $cropNumberID);
+    exit();
+
 } catch (PDOException $e) {
     die("Database error: " . $e->getMessage());
 }
@@ -105,11 +130,11 @@ try {
 
 ?>
 <form method="POST">
-    <label>Water Reading at Start of cycle</label>
+    <label>Water Meter Reading at Start of cycle (L)</label>
     <input type="number" step="0.01" name="WaterReadingATM" required>
     <br>
     <br>
-    <label>Feed Bin Stock Reading at Start of cycle</label>
+    <label>Feed Bin Stock Reading at Start of cycle (Kg)</label>
     <input type="number" step="0.01" name="BinClosingStockReading" required>
     <br>
     <br>

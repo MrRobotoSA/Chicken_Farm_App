@@ -120,9 +120,13 @@ $stmtInsert->bindParam(6, $kgPerMeterSquared);
 
 $stmtInsert->execute();
 
-   // $stmtInsert->execute();
+//THE BELOW 3 lines of CODE are TO CHANGE THE Day0InfoBoolean TO TRUE IN THE CropNumber TABLE FOR THIS CYCLE
+$sql2 = "UPDATE CropNumber SET Day0InfoBoolean = TRUE WHERE CropNumberID = ?";
+$stmt2 = $pdo->prepare($sql2);
+$stmt2->execute([$cropNumberID]);
 
-    // Redirect after success
+
+// Redirect after success
     header("Location: cropDay0waterAndFeedinput.php?HouseID=" . $houseID . "&CropNumberID=" . $cropNumberID);
     exit();
 }
